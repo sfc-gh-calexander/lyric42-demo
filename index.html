@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="snowflake-source" content="cortex-agent-authored" />
+<title>Lyric42 on Snowflake | Experience</title>
+<script type="application/json" id="snowflake-report-metadata">
+{
+  "generated": "2026-09-28",
+  "intent": "Interactive concept demo of Lyric42 + Studio42 powered by Snowflake Cortex, for Lyric CPO Brian Berkowitz",
+  "dataSources": [],
+  "sections": [
+    { "id": "hero", "title": "Lyric42 on Snowflake", "dataSources": [], "producerNotes": "All figures illustrative." },
+    { "id": "signals", "title": "Unify the signals", "dataSources": [], "producerNotes": "Source names from Lyric, ClaimShark and Concert portfolio." },
+    { "id": "intelligence", "title": "Lyric42 intelligence", "dataSources": [], "producerNotes": "Six boxes mirror the one-slider." },
+    { "id": "studio", "title": "Studio42 workspace", "dataSources": [], "producerNotes": "Scripted Cortex agent answers; illustrative claims." },
+    { "id": "value", "title": "What this unlocks", "dataSources": [], "producerNotes": "Illustrative outcome ranges." }
+  ]
+}
+</script>
+<style>
+:root{color-scheme:dark;--bg:#070d17;--bg2:#0d1726;--card:rgba(255,255,255,.04);--line:rgba(255,255,255,.09);--blue:#29B5E8;--blue2:#11567F;--ink:#e8eef6;--mut:#8a98ab;--good:#3ddc97;--warn:#ffb547;--bad:#ff6b6b}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Inter","Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;background:radial-gradient(1200px 700px at 80% -10%,rgba(41,181,232,.18),transparent 60%),radial-gradient(900px 600px at -10% 110%,rgba(17,86,127,.35),transparent 60%);pointer-events:none;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,40px);backdrop-filter:blur(14px);background:rgba(7,13,23,.6);border-bottom:1px solid var(--line)}
+.brand{display:flex;gap:10px;align-items:center;font-weight:700;letter-spacing:.2px}
+.flake{width:24px;height:24px}
+.lockup{display:flex;align-items:center;gap:14px;margin-bottom:28px;flex-wrap:wrap}
+.lockup .lw{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-1px;color:#fff}
+.lockup .lx{font-size:28px;color:var(--mut);margin:0 10px}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dots a{font-size:12px;color:var(--mut);text-decoration:none;padding:6px 12px;border-radius:99px;border:1px solid transparent;transition:.25s}
+.dots a.on,.dots a:hover{color:#fff;border-color:var(--line);background:var(--card)}
+section{position:relative;z-index:1;min-height:100vh;padding:110px clamp(16px,5vw,64px) 60px;display:flex;flex-direction:column;justify-content:center;max-width:1280px;margin:0 auto}
+.eyebrow{color:var(--blue);font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+h1{font-size:clamp(40px,7vw,88px);line-height:1.02;font-weight:800;letter-spacing:-2px}
+h2{font-size:clamp(28px,4.2vw,50px);line-height:1.08;font-weight:800;letter-spacing:-1px;margin-bottom:14px}
+.grad{background:linear-gradient(90deg,#fff,#29B5E8 60%,#7fd8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--mut);font-size:clamp(16px,1.6vw,20px);max-width:720px;line-height:1.55}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#04121d;font-weight:700;border:0;border-radius:12px;padding:13px 20px;font-size:14px;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(41,181,232,.35)}
+.btn.ghost{background:transparent;color:#fff;border:1px solid var(--line)}
+.btn.sm{padding:9px 14px;font-size:13px;border-radius:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(8px)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+/* hero */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-top:48px}
+.kpi{padding:20px}
+.kpi b{display:block;font-size:clamp(26px,3vw,38px);font-variant-numeric:tabular-nums;font-weight:800}
+.kpi span{color:var(--mut);font-size:13px}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--good);margin-bottom:22px}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--good);box-shadow:0 0 0 0 rgba(61,220,151,.7);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(61,220,151,0)}100%{box-shadow:0 0 0 0 rgba(61,220,151,0)}}
+/* signals */
+.sigwrap{display:grid;grid-template-columns:1fr 160px 1fr;gap:20px;align-items:center;margin-top:36px}
+.srcs{display:grid;gap:12px}
+.src{padding:14px 16px;display:flex;align-items:center;gap:12px;transition:.4s}
+.src .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgba(41,181,232,.12);color:var(--blue);font-weight:800;font-size:13px;flex:none}
+.src small{display:block;color:var(--mut);font-size:12px;margin-top:2px}
+.src .ct{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--blue);font-weight:700;font-size:13px}
+.src.lit{border-color:rgba(41,181,232,.55);box-shadow:0 0 24px rgba(41,181,232,.18)}
+.hub{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle,rgba(41,181,232,.35),rgba(41,181,232,.05) 70%);border:1px solid rgba(41,181,232,.5);position:relative;font-weight:800;font-size:14px}
+.hub:after{content:"";position:absolute;inset:-12px;border-radius:50%;border:1px dashed rgba(41,181,232,.35);animation:spin 18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.out{padding:24px}
+.out h3{font-size:18px;margin-bottom:10px}
+.bar{height:8px;border-radius:9px;background:rgba(255,255,255,.07);overflow:hidden;margin:8px 0 14px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue2),var(--blue));transition:width 1.6s ease}
+.row{display:flex;justify-content:space-between;font-size:13px;color:var(--mut)}
+/* intelligence */
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:34px}
+.step{padding:20px;position:relative;overflow:hidden;transition:.4s;cursor:pointer}
+.step .n{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--blue);color:var(--blue);font-weight:800;font-size:14px;margin-bottom:12px;transition:.4s}
+.step h4{font-size:16px;margin-bottom:6px}
+.step p{color:var(--mut);font-size:13px;line-height:1.5}
+.step .res{margin-top:12px;font-size:12.5px;color:var(--good);min-height:18px;opacity:0;transition:.4s}
+.step.active{border-color:rgba(41,181,232,.7);box-shadow:0 0 34px rgba(41,181,232,.2)}
+.step.active .n{background:var(--blue);color:#04121d}
+.step.done .res{opacity:1}
+.step.done .n{background:var(--good);border-color:var(--good);color:#04121d}
+.step:before{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:var(--blue);transition:width 1s}
+.step.active:before,.step.done:before{width:100%}
+.claimstrip{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;padding:16px 20px;margin-top:26px}
+.claimstrip b{font-variant-numeric:tabular-nums}
+.tag{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 9px;border-radius:99px;background:rgba(41,181,232,.14);color:var(--blue)}
+/* studio */
+.studio{display:grid;grid-template-columns:260px 1fr 340px;gap:14px;margin-top:28px;min-height:560px}
+.pane{padding:16px;display:flex;flex-direction:column;min-width:0}
+.pane h5{font-size:11px;letter-spacing:1.8px;color:var(--mut);text-transform:uppercase;margin-bottom:12px}
+.q{padding:11px 12px;border-radius:12px;border:1px solid transparent;cursor:pointer;margin-bottom:6px;transition:.2s}
+.q:hover{background:rgba(255,255,255,.04)}
+.q.sel{border-color:rgba(41,181,232,.5);background:rgba(41,181,232,.08)}
+.q .t{display:flex;justify-content:space-between;font-size:13px;font-weight:700}
+.q .s{font-size:12px;color:var(--mut);margin-top:3px;display:flex;justify-content:space-between}
+.st{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:99px}
+.st.p{background:rgba(255,181,71,.15);color:var(--warn)}.st.a{background:rgba(61,220,151,.15);color:var(--good)}.st.e{background:rgba(255,107,107,.15);color:var(--bad)}
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.hdr h3{font-size:22px}
+.hdr small{color:var(--mut);font-size:13px}
+.cortex{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:5px 10px;border-radius:99px;background:linear-gradient(90deg,var(--blue2),var(--blue));color:#fff}
+.lines{margin:16px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.ln{display:grid;grid-template-columns:34px 1fr 80px 90px;gap:8px;padding:10px 12px;font-size:13px;border-top:1px solid var(--line);align-items:center}
+.ln:first-child{border-top:0;color:var(--mut);font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.ln.flag{background:rgba(255,107,107,.07)}
+.ln.flag .amt{color:var(--bad);font-weight:700}
+.rec{padding:16px;border-radius:14px;background:linear-gradient(135deg,rgba(41,181,232,.14),rgba(41,181,232,.03));border:1px solid rgba(41,181,232,.35)}
+.rec .big{font-size:18px;font-weight:800;margin:4px 0 10px}
+.conf{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mut)}
+.ring{--p:0;width:54px;height:54px;border-radius:50%;background:conic-gradient(var(--blue) calc(var(--p)*1%),rgba(255,255,255,.08) 0);display:grid;place-items:center;flex:none;transition:--p 1s}
+.ring span{width:42px;height:42px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff}
+.why{margin-top:14px}
+.why .w{display:flex;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);margin-bottom:8px;cursor:pointer;transition:.25s}
+.why .w:hover,.why .w.open{border-color:rgba(41,181,232,.5)}
+.why .w .k{font-size:10.5px;font-weight:800;letter-spacing:1px;color:var(--blue);width:52px;flex:none;padding-top:2px}
+.why .w .d{font-size:13px}
+.why .w .x{display:none;color:var(--mut);font-size:12.5px;margin-top:6px;line-height:1.5}
+.why .w.open .x{display:block}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:14px}
+.chat{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding-right:4px;max-height:420px}
+.msg{font-size:13px;line-height:1.5;padding:10px 12px;border-radius:12px;max-width:92%;animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}}
+.msg.u{align-self:flex-end;background:var(--blue);color:#04121d;font-weight:600}
+.msg.b{background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.msg.b cite{display:block;font-style:normal;font-size:11px;color:var(--blue);margin-top:6px}
+.typing{display:inline-flex;gap:4px}.typing i{width:6px;height:6px;border-radius:50%;background:var(--mut);animation:bl 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes bl{50%{opacity:.2}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{font-size:12px;padding:7px 10px;border-radius:99px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;transition:.2s;text-align:left}
+.chip:hover{border-color:var(--blue);color:#fff}
+.powered{font-size:11px;color:var(--mut);margin-top:10px;display:flex;align-items:center;gap:6px}
+.totals{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--mut);margin-top:14px}
+.totals b{color:#fff;font-variant-numeric:tabular-nums}
+.toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,40px);opacity:0;background:#0f2233;border:1px solid rgba(41,181,232,.5);padding:12px 18px;border-radius:12px;font-size:13px;z-index:60;transition:.35s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+/* value */
+.vals{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:34px}
+.val{padding:24px}
+.val b{display:block;font-size:clamp(34px,4vw,48px);font-weight:800;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.val h4{font-size:15px;margin-bottom:6px}
+.val p{color:var(--mut);font-size:13px;line-height:1.5}
+.arch{margin-top:28px;padding:20px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:center}
+.arch .blk{padding:10px 14px;border-radius:10px;border:1px solid var(--line);font-size:13px;font-weight:600;background:rgba(255,255,255,.03)}
+.arch .blk.sf{border-color:rgba(41,181,232,.6);background:rgba(41,181,232,.1)}
+.arch .ar{color:var(--blue)}
+footer{position:relative;z-index:1;text-align:center;color:var(--mut);font-size:12px;padding:30px 16px 50px}
+.hint{position:fixed;right:18px;bottom:18px;z-index:40;font-size:11px;color:var(--mut);background:rgba(7,13,23,.7);border:1px solid var(--line);padding:6px 10px;border-radius:8px}
+@media (max-width:1100px){.studio{grid-template-columns:1fr 1fr}.studio .pane.chatp{grid-column:1/-1}}
+@media (max-width:760px){.studio{grid-template-columns:1fr}.sigwrap{grid-template-columns:1fr}.hub{width:150px;margin:auto}.dots{display:none}.ln{grid-template-columns:28px 1fr 70px}.ln .cd{display:none}.hint{display:none}}
+img,svg{max-width:100%;height:auto}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sf" viewBox="0 0 640 640">
+      <g fill="none" stroke="#29B5E8" stroke-width="66" stroke-linecap="round" stroke-linejoin="round">
+        <g id="arm"><path d="M42 242 L170 320 L42 398"/></g>
+        <use href="#arm" transform="rotate(60 320 320)"/><use href="#arm" transform="rotate(120 320 320)"/>
+        <use href="#arm" transform="rotate(180 320 320)"/><use href="#arm" transform="rotate(240 320 320)"/>
+        <use href="#arm" transform="rotate(300 320 320)"/>
+      </g>
+      <rect x="258" y="258" width="124" height="124" rx="22" transform="rotate(45 320 320)" fill="#29B5E8"/>
+      <rect x="300" y="300" width="40" height="40" rx="10" transform="rotate(45 320 320)" fill="var(--bg)"/>
+    </symbol>
+    <clipPath id="lyl"><path d="M140 22Q145 2 170 2H320Q352 2 344 34L210 552Q204 578 176 578H30Q-4 578 4 546Z"/></clipPath>
+    <symbol id="lymark" viewBox="0 0 420 742">
+      <path d="M140 22Q145 2 170 2H320Q352 2 344 34L210 552Q204 578 176 578H30Q-4 578 4 546Z" fill="#7ECCBA"/>
+      <path d="M206 184Q212 160 240 160H380Q420 160 412 196L276 714Q270 740 240 740H100Q64 740 72 706Z" fill="#12545F"/>
+      <path d="M206 184Q212 160 240 160H380Q420 160 412 196L276 714Q270 740 240 740H100Q64 740 72 706Z" fill="#0C8070" clip-path="url(#lyl)"/>
+    </symbol>
+    <symbol id="sfw" viewBox="0 0 640 640">
+      <g fill="none" stroke="#fff" stroke-width="66" stroke-linecap="round" stroke-linejoin="round">
+        <path id="armw" d="M42 242 L170 320 L42 398"/>
+        <use href="#armw" transform="rotate(60 320 320)"/><use href="#armw" transform="rotate(120 320 320)"/>
+        <use href="#armw" transform="rotate(180 320 320)"/><use href="#armw" transform="rotate(240 320 320)"/>
+        <use href="#armw" transform="rotate(300 320 320)"/>
+      </g>
+      <rect x="258" y="258" width="124" height="124" rx="22" transform="rotate(45 320 320)" fill="#fff"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav>
+  <div class="brand">
+    <svg style="width:18px;height:30px"><use href="#lymark"/></svg>
+    <span style="font-size:20px;font-weight:800;letter-spacing:-.5px">Lyric</span>
+    <span style="color:var(--mut);font-weight:400;margin:0 4px">&times;</span>
+    <svg class="flake"><use href="#sf"/></svg>
+    <span style="font-weight:700">Snowflake</span>
+  </div>
+  <div class="dots" id="dots">
+    <a href="#hero">Overview</a><a href="#signals">Signals</a><a href="#intelligence">Intelligence</a><a href="#studio">Studio42</a><a href="#value">Value</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="reveal">
+    <div class="live"><i></i>Live on Snowflake &middot; illustrative</div>
+    <div class="lockup">
+      <svg style="width:44px;height:78px"><use href="#lymark"/></svg><span class="lw">Lyric</span>
+      <span class="lx">&times;</span>
+      <svg style="width:64px;height:64px"><use href="#sf"/></svg><span class="lw">snowflake</span>
+    </div>
+    <div class="eyebrow">Lyric42 on the AI Data Cloud</div>
+    <h1>Every claim.<br><span class="grad">Every signal. One decision.</span></h1>
+    <p class="lead" style="margin-top:22px">Lyric42 brings together pre-pay edits, ClaimShark audits, Concert policy and clinical records into one governed intelligence layer. Studio42 then explains every decision, and all of it runs on Snowflake Cortex.</p>
+    <div style="display:flex;gap:10px;margin-top:30px;flex-wrap:wrap">
+      <a class="btn" href="#signals">Experience it &rarr;</a>
+      <a class="btn ghost" href="#studio">Jump to Studio42</a>
+    </div>
+  </div>
+  <div class="kpis reveal">
+    <div class="card kpi"><b id="k1">0</b><span>Claims evaluated today</span></div>
+    <div class="card kpi"><b id="k2">$0</b><span>Improper payments prevented</span></div>
+    <div class="card kpi"><b id="k3">0%</b><span>Auto-adjudicated</span></div>
+    <div class="card kpi"><b id="k4">0 ms</b><span>Median decision latency</span></div>
+  </div>
+</section>
+
+<!-- SIGNALS -->
+<section id="signals">
+  <div class="reveal">
+    <div class="eyebrow">01 &middot; Unify the signals</div>
+    <h2>Five portfolio products.<br>One governed view.</h2>
+    <p class="lead">Today these signals sit in separate stacks. On Snowflake they are joined at the entity level with zero-copy sharing, so no pipeline has to move PHI.</p>
+  </div>
+  <div class="sigwrap reveal">
+    <div class="srcs" id="srcs">
+      <div class="card src"><div class="ic">PP</div><div>Lyric pre-pay edits<small>Claim-line rules &amp; edits</small></div><div class="ct">0</div></div>
+      <div class="card src"><div class="ic">CS</div><div>ClaimShark audits<small>Post-pay recovery findings</small></div><div class="ct">0</div></div>
+      <div class="card src"><div class="ic">CO</div><div>Concert policy<small>Genetic &amp; lab coverage rules</small></div><div class="ct">0</div></div>
+      <div class="card src"><div class="ic">EN</div><div>Entity &amp; provider data<small>NPI, TIN, networks</small></div><div class="ct">0</div></div>
+      <div class="card src"><div class="ic">MR</div><div>Medical records<small>Unstructured clinical docs</small></div><div class="ct">0</div></div>
+    </div>
+    <div class="hub" id="hub"><div><svg style="width:54px;height:54px;display:block;margin:0 auto 8px"><use href="#sf"/></svg>AI Data Cloud</div></div>
+    <div class="card out">
+      <h3>Unified claim intelligence</h3>
+      <div class="row"><span>Entity resolution</span><span id="p1">0%</span></div><div class="bar"><i id="b1"></i></div>
+      <div class="row"><span>Policy coverage mapped</span><span id="p2">0%</span></div><div class="bar"><i id="b2"></i></div>
+      <div class="row"><span>Records AI-parsed</span><span id="p3">0%</span></div><div class="bar"><i id="b3"></i></div>
+      <p style="color:var(--mut);font-size:13px;line-height:1.5;margin-top:6px">Governed by Horizon: masking, row access and lineage on every signal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTELLIGENCE -->
+<section id="intelligence">
+  <div class="reveal">
+    <div class="eyebrow">02 &middot; Lyric42 intelligence</div>
+    <h2>Watch one claim go through all six steps.</h2>
+    <p class="lead">Press <b>Run claim</b> to send CLM-1042 through the pipeline. Each step runs where the data already lives.</p>
+  </div>
+  <div class="card claimstrip reveal">
+    <span class="tag">CLM-1042</span>
+    <span>Provider <b>Northside Lab Group</b></span>
+    <span>Billed <b>$18,742</b></span>
+    <span>Lines <b>6</b></span>
+    <span style="margin-left:auto;display:flex;gap:8px"><button class="btn sm" id="run">Run claim &#9654;</button><button class="btn sm ghost" id="reset">Reset</button></span>
+  </div>
+  <div class="pipe reveal" id="pipe">
+    <div class="card step"><div class="n">1</div><h4>Entity resolution</h4><p>Matches providers, members and TINs across every source.</p><div class="res">&#10003; Linked to 3 related TINs</div></div>
+    <div class="card step"><div class="n">2</div><h4>Policy to code</h4><p>Turns Concert and payer policy text into executable rules.</p><div class="res">&#10003; 14 rules applied</div></div>
+    <div class="card step"><div class="n">3</div><h4>Payment integrity &amp; fraud</h4><p>Lyric edits, together with ClaimShark audit patterns.</p><div class="res">&#10003; Duplicate found on line 3</div></div>
+    <div class="card step"><div class="n">4</div><h4>Governed AI</h4><p>Cortex AI reads the medical records inside Snowflake's security boundary.</p><div class="res">&#10003; Record does not support line 3</div></div>
+    <div class="card step"><div class="n">5</div><h4>Automated decisions</h4><p>AI/ML scoring auto-adjudicates at scale.</p><div class="res">&#10003; Scored 94% &middot; routed to review</div></div>
+    <div class="card step"><div class="n">6</div><h4>Studio42 agent</h4><p>Traces the rationale to the policy, data and logic behind it.</p><div class="res">&#10003; Explanation ready &rarr; Studio42</div></div>
+  </div>
+</section>
+
+<!-- STUDIO -->
+<section id="studio">
+  <div class="reveal">
+    <div class="eyebrow">03 &middot; Deliver through Studio42</div>
+    <h2>The reviewer's workspace, with its AI assistant running on Snowflake.</h2>
+    <p class="lead">Pick a claim, expand the reasoning trail, ask the agent a question, then act on it.</p>
+  </div>
+  <div class="studio reveal">
+    <div class="card pane">
+      <h5>Review queue</h5>
+      <div id="queue"></div>
+      <div class="totals"><span>Reviewed <b id="tRev">0</b></span><span>Saved <b id="tSav">$0</b></span></div>
+    </div>
+    <div class="card pane" id="detail"></div>
+    <div class="card pane chatp">
+      <h5>Studio42 agent</h5>
+      <div class="chat" id="chat"></div>
+      <div class="chips" id="chips"></div>
+      <div class="powered"><svg style="width:14px;height:14px"><use href="#sf"/></svg>Powered by Snowflake Cortex &middot; your data never leaves Snowflake</div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE -->
+<section id="value">
+  <div class="reveal">
+    <div class="eyebrow">04 &middot; What this unlocks</div>
+    <h2>Turning the portfolio into a platform.</h2>
+    <p class="lead">Each acquisition adds more signal to the same platform rather than another stack to integrate.</p>
+  </div>
+  <div class="vals reveal">
+    <div class="card val"><b class="grad" data-to="30" data-suf="%+">0</b><h4>Higher hit rates</h4><p>Cross-product signals catch what a single edit engine misses.</p></div>
+    <div class="card val"><b class="grad" data-to="60" data-suf="%">0</b><h4>Fewer manual reviews</h4><p>High-confidence decisions auto-adjudicate, with a full audit trail.</p></div>
+    <div class="card val"><b class="grad" data-to="90" data-suf=" days">0</b><h4>Acquisition to integrated</h4><p>Zero-copy onboarding for the next ClaimShark or Concert.</p></div>
+    <div class="card val"><b class="grad" data-to="100" data-suf="%">0</b><h4>Explainable decisions</h4><p>Every outcome traced to policy, data and logic.</p></div>
+  </div>
+  <div class="card arch reveal">
+    <span class="blk">Lyric &middot; ClaimShark &middot; Concert</span><span class="ar">&rarr;</span>
+    <span class="blk sf">Snowflake AI Data Cloud</span><span class="ar">&rarr;</span>
+    <span class="blk sf">Cortex AI &middot; ML &middot; Horizon</span><span class="ar">&rarr;</span>
+    <span class="blk">Lyric42</span><span class="ar">&rarr;</span>
+    <span class="blk">Studio42 &middot; health plans</span>
+  </div>
+  <div style="margin-top:30px;text-align:center" class="reveal"><a class="btn" href="#hero">Back to start &uarr;</a></div>
+</section>
+
+<footer><div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:12px;opacity:.9"><svg style="width:14px;height:24px"><use href="#lymark"/></svg><b style="color:#fff">Lyric</b><span>&times;</span><svg style="width:20px;height:20px"><use href="#sf"/></svg><b style="color:#fff">Snowflake</b></div>Concept experience for Lyric. All claims, figures and outcomes are illustrative. &copy; 2026 Snowflake Inc.</footer>
+<div class="hint">&larr; &rarr; to navigate</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+  const fmt=n=>n.toLocaleString('en-US');
+  const money=n=>'$'+fmt(Math.round(n));
+
+  /* reveal + nav */
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');}}),{threshold:.15});
+  $$('.reveal').forEach(el=>io.observe(el));
+  const secs=$$('section');
+  const navIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){$$('#dots a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));
+    if(e.target.id==='signals')runSignals(); if(e.target.id==='value')runValue();}}),{threshold:.5});
+  secs.forEach(s=>navIO.observe(s));
+  document.addEventListener('keydown',e=>{
+    if(e.target.tagName==='INPUT')return;
+    const y=window.scrollY+80; let i=secs.findIndex(s=>s.offsetTop>y)-1; if(i<-1)i=secs.length-1; if(i<0)i=0;
+    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();(secs[i+1]||secs[i]).scrollIntoView();}
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();const cur=secs.findIndex(s=>Math.abs(s.offsetTop-window.scrollY)<120);(secs[(cur>0?cur:i)-1]||secs[0]).scrollIntoView();}
+  });
+
+  /* hero counters */
+  let claims=1284330, saved=4213880;
+  function tickHero(){claims+=Math.floor(40+Math.random()*90); saved+=Math.random()*1400;
+    $('#k1').textContent=fmt(claims); $('#k2').textContent=money(saved);}
+  function animate(el,to,dur,f){const t0=performance.now();(function s(t){const p=Math.min(1,(t-t0)/dur),v=to*(1-Math.pow(1-p,3));el.textContent=f(v);if(p<1)requestAnimationFrame(s);})(t0);}
+  animate($('#k3'),71,1600,v=>Math.round(v)+'%'); animate($('#k4'),38,1600,v=>Math.round(v)+' ms');
+  animate($('#k1'),claims,1600,v=>fmt(Math.round(v))); animate($('#k2'),saved,1600,v=>money(v));
+  setTimeout(()=>setInterval(tickHero,900),1700);
+
+  /* signals */
+  let sigDone=false;
+  function runSignals(){ if(sigDone)return; sigDone=true;
+    const tgt=[48213,6920,1310,221480,18744];
+    $$('#srcs .src').forEach((s,i)=>setTimeout(()=>{s.classList.add('lit');animate(s.querySelector('.ct'),tgt[i],1400,v=>fmt(Math.round(v)));},i*350));
+    setTimeout(()=>{[[1,98],[2,94],[3,87]].forEach(([k,v])=>{$('#b'+k).style.width=v+'%';animate($('#p'+k),v,1600,x=>Math.round(x)+'%');});},1800);
+  }
+
+  /* pipeline */
+  let running=false;
+  $('#run').addEventListener('click',()=>{ if(running)return; running=true; reset();
+    const st=$$('#pipe .step'); st.forEach((s,i)=>{setTimeout(()=>s.classList.add('active'),i*900);setTimeout(()=>{s.classList.remove('active');s.classList.add('done');},i*900+800);});
+    setTimeout(()=>{running=false;toast('CLM-1042 is ready in Studio42. Scroll down to review it.');},st.length*900);
+  });
+  function reset(){$$('#pipe .step').forEach(s=>s.classList.remove('active','done'));}
+  $('#reset').addEventListener('click',()=>{if(!running)reset();});
+
+  /* studio data */
+  const claims42=[
+    {id:'CLM-1042',prov:'Northside Lab Group',amt:18742,save:4380,conf:94,rec:'Deny line 3: duplicate billing',
+     lines:[['81479','Unlisted molecular path',6120],['80307','Drug screen, presumptive',1840],['80307','Drug screen, presumptive (dup)',4380,1],['87798','Infectious agent DNA',2912],['36415','Venipuncture',90],['99213','Office visit',3400]],
+     why:[['POLICY','Concert rule: lab panel limit','Concert Genetic Testing policy GT-212 limits presumptive drug screens to one per date of service, per member and per provider.'],
+          ['DATA','ClaimShark audit match','ClaimShark recovered duplicates from this same TIN cluster 11 times in the last 12 months, and the pattern matches at 0.97 similarity.'],
+          ['LOGIC','Lyric edit 42-117','Lyric edit 42-117 flags the same CPT code on the same member and DOS with a matching modifier set. Cortex confirmed that the medical record documents only one specimen.']]},
+    {id:'CLM-1057',prov:'Peachtree Genomics',amt:9310,save:6150,conf:88,rec:'Pend: prior auth missing for 81162',
+     lines:[['81162','BRCA1/2 full sequence',6150,1],['96040','Genetic counseling',520],['99204','New patient visit',2640]],
+     why:[['POLICY','Concert rule: hereditary cancer PA','Hereditary cancer panels require prior authorization and a documented family history (GT-104).'],
+          ['DATA','No PA on file','No prior authorization matched this member, CPT and date window in the utilization management feed.'],
+          ['LOGIC','Lyric edit 42-031','Lyric edit 42-031 checks that a PA exists before payment and routes to pend instead of deny.']]},
+    {id:'CLM-1063',prov:'Buckhead Imaging',amt:4125,save:0,conf:97,rec:'Approve: clean claim',
+     lines:[['70553','MRI brain w/ & w/o',3610],['A9579','Gadolinium contrast',515]],
+     why:[['POLICY','Imaging policy met','Clinical indication is documented and matches the covered diagnosis list.'],
+          ['DATA','Provider in good standing','There are no audit findings on this TIN, and it is in network.'],
+          ['LOGIC','All edits passed','All 22 applicable Lyric edits passed, so the claim is auto-adjudicated.']]},
+    {id:'CLM-1071',prov:'Metro Infusion Partners',amt:27980,save:11200,conf:91,rec:'Reduce line 2: units exceed max',
+     lines:[['J9271','Pembrolizumab, 1 mg',22400,1],['96413','Chemo infusion, 1st hr',1180],['99215','Office visit',4400]],
+     why:[['POLICY','Drug unit maximum','The payer policy caps J9271 at 200 units per administration, and 400 were billed.'],
+          ['DATA','Dose vs weight','The medical record weight, parsed by Cortex, supports 200 mg.'],
+          ['LOGIC','Lyric edit 42-208','Lyric edit 42-208 is an MUE-style unit check with a clinical override path.']]}
+  ];
+  const state={}; claims42.forEach(c=>state[c.id]='p'); let sel='CLM-1042', rev=0, sav=0;
+
+  function renderQueue(){
+    $('#queue').innerHTML=claims42.map(c=>`<div class="q ${c.id===sel?'sel':''}" data-id="${c.id}">
+      <div class="t"><span>${c.id}</span><span>${money(c.amt)}</span></div>
+      <div class="s"><span>${c.prov}</span><span class="st ${state[c.id]}">${{p:'Pending',a:'Actioned',e:'Escalated'}[state[c.id]]}</span></div></div>`).join('');
+    $$('#queue .q').forEach(q=>q.addEventListener('click',()=>{sel=q.dataset.id;renderQueue();renderDetail();resetChat();}));
+  }
+  function renderDetail(){
+    const c=claims42.find(x=>x.id===sel);
+    $('#detail').innerHTML=`<div class="hdr"><div><h3>${c.id} &middot; ${money(c.amt)}</h3><small>${c.prov} &middot; ${c.lines.length} lines</small></div><span class="cortex"><svg style="width:13px;height:13px"><use href="#sfw"/></svg>Snowflake Cortex</span></div>
+      <div class="lines"><div class="ln"><span>#</span><span>Service</span><span class="cd">CPT</span><span style="text-align:right">Billed</span></div>
+      ${c.lines.map((l,i)=>`<div class="ln ${l[3]?'flag':''}"><span>${i+1}</span><span>${l[1]}</span><span class="cd">${l[0]}</span><span class="amt" style="text-align:right">${money(l[2])}</span></div>`).join('')}</div>
+      <div class="rec"><div style="font-size:12px;color:var(--mut)">Lyric42 recommends</div><div class="big">${c.rec}</div>
+        <div class="conf"><div class="ring" id="ring"><span>0%</span></div><div>Confidence<br><b style="color:#fff">${c.save?money(c.save)+' potential savings':'No adjustment'}</b></div></div></div>
+      <div class="why"><h5 style="margin:14px 0 8px">Why &middot; tap to expand</h5>
+        ${c.why.map(w=>`<div class="w"><div class="k">${w[0]}</div><div><div class="d">${w[1]}</div><div class="x">${w[2]}</div></div></div>`).join('')}</div>
+      <div class="acts"><button class="btn sm" data-a="a">&#10003; Accept</button><button class="btn sm ghost" data-a="e">Escalate</button><button class="btn sm ghost" data-a="o">Override &amp; pay</button></div>`;
+    $$('#detail .w').forEach(w=>w.addEventListener('click',()=>w.classList.toggle('open')));
+    const ring=$('#ring'); let p=0; const iv=setInterval(()=>{p+=2;if(p>=c.conf){p=c.conf;clearInterval(iv);}ring.style.background=`conic-gradient(var(--blue) ${p}%,rgba(255,255,255,.08) 0)`;ring.querySelector('span').textContent=p+'%';},14);
+    $$('#detail [data-a]').forEach(b=>b.addEventListener('click',()=>act(c,b.dataset.a)));
+  }
+  function act(c,a){
+    if(state[c.id]!=='p'){toast(c.id+' was already actioned.');return;}
+    state[c.id]=a==='e'?'e':'a'; rev++; if(a==='a')sav+=c.save;
+    $('#tRev').textContent=rev; animate($('#tSav'),sav,700,money);
+    toast(a==='a'?`${c.id} accepted. ${c.save?money(c.save)+' saved. ':''}The audit trail was written to Snowflake.`:a==='e'?`${c.id} escalated to clinical review with its full rationale.`:`${c.id} overridden and paid. Your feedback goes into model retraining.`);
+    const nxt=claims42.find(x=>state[x.id]==='p'); if(nxt){sel=nxt.id;setTimeout(()=>{renderQueue();renderDetail();resetChat();},500);} else renderQueue();
+  }
+
+  /* chat */
+  const qa={
+    'Why was this flagged?':c=>[`${c.rec}. Three independent signals agree: ${c.why.map(w=>w[1]).join('; ')}.`,'Cited: '+c.why.map(w=>w[0]).join(' · ')],
+    'Show similar claims from this provider':c=>[`I found 11 claims from ${c.prov} and its linked TINs in the last 90 days with the same pattern, totalling ${money(c.save*9.3||41200)} at risk. Want me to open them as a batch in Studio42?`,'Cited: Lyric42 entity graph · ClaimShark findings'],
+    'Summarize the medical record':c=>['Cortex parsed the 14-page record. It documents one specimen collection on the date of service, and the ordering physician\'s note supports medical necessity for a single panel only.','Cited: AI_PARSE_DOCUMENT · record MR-88213, p.3–4'],
+    'Draft the provider letter':c=>[`Draft: "Dear ${c.prov}, after review of ${c.id}, the following adjustment applies: ${c.rec}. This determination is based on policy criteria and the submitted documentation. You may appeal within 60 days." Would you like me to send it for approval?`,'Generated with Cortex AI_COMPLETE · governed template'],
+  };
+  function resetChat(){
+    const c=claims42.find(x=>x.id===sel);
+    $('#chat').innerHTML=`<div class="msg b">Hi, I'm the Studio42 agent. I've reviewed <b>${c.id}</b>. What would you like to know?<cite>Running on Snowflake Cortex</cite></div>`;
+    $('#chips').innerHTML=Object.keys(qa).map(k=>`<button class="chip">${k}</button>`).join('');
+    $$('#chips .chip').forEach(b=>b.addEventListener('click',()=>ask(b.textContent)));
+  }
+  function ask(q){
+    const c=claims42.find(x=>x.id===sel), chat=$('#chat');
+    chat.insertAdjacentHTML('beforeend',`<div class="msg u">${q}</div>`);
+    const t=document.createElement('div');t.className='msg b';t.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';chat.appendChild(t);chat.scrollTop=chat.scrollHeight;
+    const [ans,cite]=qa[q](c);
+    setTimeout(()=>{t.innerHTML='';let i=0;const iv=setInterval(()=>{i+=3;t.textContent=ans.slice(0,i);chat.scrollTop=chat.scrollHeight;if(i>=ans.length){clearInterval(iv);t.innerHTML=ans.replace(/</g,'&lt;')+`<cite>${cite}</cite>`;}},14);},700);
+  }
+
+  /* value */
+  let valDone=false;
+  function runValue(){ if(valDone)return; valDone=true; $$('.val b').forEach(b=>animate(b,+b.dataset.to,1500,v=>Math.round(v)+b.dataset.suf)); }
+
+  function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),3200);}
+
+  renderQueue(); renderDetail(); resetChat();
+})();
+</script>
+</body>
+</html>
